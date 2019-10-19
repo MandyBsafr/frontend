@@ -14,7 +14,8 @@
 			"components/*": ["src/components/*"],
 			"data/*": ["src/data/*"],
 			"helpers/*": ["src/helpers/*"],
-			"reducers/*": ["src/reducers/*"]
+			"reducers/*": ["src/reducers/*"],
+			"views/*": ["src/views/*"]
 		}
 	},
 	"include": [

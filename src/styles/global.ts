@@ -1,11 +1,9 @@
 /* eslint-disable */
 import { createGlobalStyle } from 'styled-components';
 import theme from './theme';
-import reset from './reset';
 import { media } from 'styles/utils';
 
 const GlobalStyles = createGlobalStyle`
-  ${reset}
   body {
     font-family: ${theme.fontBody};
     color: ${theme.colorCharcoal};
