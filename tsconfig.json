@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"baseUrl": "./",
+    	"jsx": "react",
+		"target": "esnext",
+		"moduleResolution": "node",
+		"allowJs": true,
+		"strict": true,
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"sourceMap": true,
+		"paths": {
+			"styles/*": ["src/styles/*"],
+			"components/*": ["src/components/*"],
+			"data/*": ["src/data/*"],
+			"helpers/*": ["src/helpers/*"],
+			"reducers/*": ["src/reducers/*"]
+		}
+	},
+	"include": [
+		"src"
+	]
+}
