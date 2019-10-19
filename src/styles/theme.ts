@@ -6,6 +6,10 @@ const theme = {
   colorCharcoal: '#333',
   colorDarkCharcoal: '#111',
   colorRed: 'tomato',
+  colorOrange: '#FE805D',
+  colorPurple: '#5246AA',
+  colorPurple2: '#DED9FD',
+  colorPurple3: '#E8E7FE',
 
   colorTextPrimary: '#aaa',
   colorBorder: '#aaa',
@@ -15,6 +19,8 @@ const theme = {
   fontBody: "'Nunito Sans', Helvetica, 'Trebuchet MS', Arial, sans-serif",
 
   dropShadow: '7px 7px 5px rgba(0, 0, 0, 0.2)',
+
+  maxInputWidth: '250px',
 };
 
 export default theme;

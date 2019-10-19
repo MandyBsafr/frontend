@@ -1,11 +1,15 @@
 import styled from 'styled-components';
-import { Button as AntdButton } from 'antd';
+import {
+  Button as AntdButton,
+} from 'antd';
 import theme from 'styles/theme';
 
 export const Button = styled(AntdButton)`
-  padding: 0.5em 2em;
   font-size: 1rem;
-  border-radius: 5px;
+  border-radius: 2em;
   cursor: pointer;
-  background: ${theme.colorLightGrey};
+  background: ${theme.colorOrange};
+  color: ${theme.colorWhite};
+  width: 100%;
+  max-width: ${theme.maxInputWidth};
 `;

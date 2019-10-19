@@ -6,19 +6,32 @@ export const Container = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   width: 100%;
 `;
 
 export const Intro = styled.section`
-  width: 200px;
-  height: 200px;
-  background: ${theme.colorLightGrey};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 250px;
   margin: 1em 0;
 `;
 
-export const Logo = styled.div`
-  width: 200px;
-  height: 50px;
-  background: ${theme.colorLightGrey};
-  margin: 1em 0;
+export const Heading = styled.h1`
+  font-weight: 700;
 `;
+
+export const OrangeText = styled.span`
+  color: ${theme.colorOrange};
+`;
+
+export const Image = styled.div`
+  width: 200px;
+  height: 200px;
+  background: url("assets/images/intro.png") center center no-repeat;
+  background-size: contain;
+  margin-bottom: 2em;
+`;
+
+export const Copy = styled.div``;

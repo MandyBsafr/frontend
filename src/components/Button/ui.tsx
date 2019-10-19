@@ -9,5 +9,5 @@ interface Props {
 const { Button } = styles;
 
 export default memo(
-  (props: Props) => <Button {...props} />,
+  (props: Props) => <Button size="large" {...props} />,
 );
