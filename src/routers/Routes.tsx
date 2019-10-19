@@ -6,7 +6,7 @@ const Routes = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <View location="home" />
+        <View />
       </Route>
     </Switch>
   );
