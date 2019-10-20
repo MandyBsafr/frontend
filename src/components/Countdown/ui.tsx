@@ -3,9 +3,15 @@ import ReactCountdown from 'react-countdown-now';
 import Safe from 'components/Safe';
 import * as styles from './styles';
 
+type Contact = {
+  name: string | undefined,
+  phone: string | undefined,
+};
+
 interface Props {
   id: string,
   checkoutTime: string,
+  contactList: Contact[],
   location?: {
     lat: number | undefined,
     lng: number | undefined,
@@ -47,18 +53,33 @@ class Countdown extends Component<Props, LocalState> {
     this.setState({ completed: true });
   }
 
+  sendMessageToContacts() {
+    const { id } = this.props;
+    return fetch('https://bsafr-api.herokuapp.com/', {
+      method: 'POST',
+      body: JSON.stringify(id),
+    });
+  }
+
   updateSession() {
     const {
       id,
       location,
     } = this.props;
 
-    console.log('UPDATE SESSION: ', id, location);
+    return fetch(`https://bsafr-api.herokuapp.com/update-location/${id}`, {
+      method: 'POST',
+      body: JSON.stringify({
+        latitude: location ? location.lat : undefined,
+        longitude: location ? location.lng : undefined,
+      }),
+    });
   }
 
   render() {
     const {
       checkoutTime,
+      contactList,
     } = this.props;
 
     const { completed } = this.state;
@@ -73,9 +94,9 @@ class Countdown extends Component<Props, LocalState> {
         </Heading>
         <Actions>
           <Button type="safe" onClick={() => this.setState({ completed: true })}>Mark me as safe</Button>
-          <Button type="message">Send alert message now</Button>
-          <Button type="callContact">Call my emergency contact</Button>
-          <Button type="call000">Call 000</Button>
+          <Button onClick={() => this.sendMessageToContacts()} type="message">Send alert message now</Button>
+          <a href={`tel:${contactList[0].phone}`}><Button type="callContact">Call my emergency contact</Button></a>
+          <a href="tel:000"><Button type="call000">Call 000</Button></a>
         </Actions>
       </Container>
     );

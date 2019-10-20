@@ -86,8 +86,31 @@ class CreateForm extends Component<Props & GeolocatedProps, LocalState> {
     this.setState({ currentSection: currentSection - 1 });
   }
 
-  submit() {
-    this.setState({ submitted: true, id: '1' });
+  async submit() {
+    const {
+      location,
+      name,
+      phone,
+      contactList,
+      checkoutTime,
+    } = this.state;
+
+    const response = await fetch('https://bsafr-api.herokuapp.com/users/create', {
+      method: 'POST',
+      body: JSON.stringify({
+        latitude: location ? location.lat : undefined,
+        longitude: location ? location.lng : undefined,
+        name,
+        number: phone,
+        contactList: contactList.map((c: any) => ({
+          name: c.name,
+          number: c.phone,
+        })),
+        checkOut: checkoutTime,
+      }),
+    });
+
+    this.setState({ submitted: true, id: await response.json() });
   }
 
   render() {
@@ -103,8 +126,15 @@ class CreateForm extends Component<Props & GeolocatedProps, LocalState> {
       checkoutTime,
     } = this.state;
 
-    if (submitted && id && checkoutTime) {
-      return <Countdown id={id} location={location} checkoutTime={checkoutTime} />;
+    if (submitted && id && checkoutTime && contactList) {
+      return (
+        <Countdown
+          id={id}
+          location={location}
+          checkoutTime={checkoutTime}
+          contactList={contactList}
+        />
+      );
     }
 
     return (
