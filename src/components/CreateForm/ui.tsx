@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { geolocated, GeolocatedProps } from 'react-geolocated';
 import { Icon } from 'antd';
 import Button from 'components/Button';
+import Countdown from 'components/Countdown';
 // import Map from 'components/Map';
 import moment, { Moment } from 'moment';
 import * as styles from './styles';
@@ -14,8 +15,13 @@ type Contact = {
 interface Props {}
 
 interface LocalState {
+  id: string | undefined,
   submitted: boolean,
   currentSection: number,
+  location?: {
+    lat: undefined,
+    lng: undefined,
+  },
   name: string | undefined,
   phone: string | undefined,
   contactList: Contact[],
@@ -40,15 +46,20 @@ class CreateForm extends Component<Props & GeolocatedProps, LocalState> {
     super(props);
 
     this.state = {
+      id: undefined,
       submitted: false,
       currentSection: 1,
       name: undefined,
       phone: undefined,
+      location: {
+        lat: undefined,
+        lng: undefined,
+      },
       contactList: [{
         name: undefined,
         phone: undefined,
       }],
-      checkoutTime: undefined,
+      checkoutTime: moment().utc().format(),
     };
   }
 
@@ -76,21 +87,25 @@ class CreateForm extends Component<Props & GeolocatedProps, LocalState> {
   }
 
   submit() {
-    console.log('Submitted', this.state);
+    this.setState({ submitted: true, id: '1' });
   }
 
   render() {
     const { coords, isGeolocationAvailable, isGeolocationEnabled } = this.props;
     const {
+      id,
       submitted,
       currentSection,
+      location,
       name,
       phone,
       contactList,
       checkoutTime,
     } = this.state;
 
-    if (submitted) return <div>Yay</div>;
+    if (submitted && id && checkoutTime) {
+      return <Countdown id={id} location={location} checkoutTime={checkoutTime} />;
+    }
 
     return (
       <Container>
@@ -165,7 +180,9 @@ class CreateForm extends Component<Props & GeolocatedProps, LocalState> {
             defaultValue={moment()}
             size="large"
             format="HH:mm"
-            onChange={(time: Moment) => this.setState({ checkoutTime: time.utc().format() })}
+            onChange={
+              (time: Moment) => this.setState({ checkoutTime: time.clone().utc().format() })
+            }
           />
           <Button onClick={() => this.nextSection()}>Next</Button>
         </Section>
@@ -198,7 +215,7 @@ class CreateForm extends Component<Props & GeolocatedProps, LocalState> {
     );
   }
 }
-
+//
 // <Section isActive={currentSection === 5}>
 //   { isGeolocationAvailable && isGeolocationEnabled && coords && (
 //     <Map

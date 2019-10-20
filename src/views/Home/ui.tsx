@@ -48,7 +48,7 @@ class HomeView extends Component<Props, LocalState> {
                 </p>
               </Copy>
             </Intro>
-            <Button onClick={() => this.showForm()}>I want to feel safe</Button>
+            <Button onClick={() => this.showForm()}>I want to feel safer</Button>
           </>
         )}
         { isFormVisible && <CreateForm /> }
