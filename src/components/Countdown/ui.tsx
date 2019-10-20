@@ -53,6 +53,15 @@ class Countdown extends Component<Props, LocalState> {
     this.setState({ completed: true });
   }
 
+  markCompleted() {
+    const { id } = this.props;
+    fetch('https://bsafr-api.herokuapp.com/markSafe', {
+      method: 'POST',
+      body: JSON.stringify(id),
+    });
+    this.setState({ completed: true });
+  }
+
   sendMessageToContacts() {
     const { id } = this.props;
     return fetch('https://bsafr-api.herokuapp.com/', {
@@ -93,7 +102,7 @@ class Countdown extends Component<Props, LocalState> {
           <ReactCountdown date={checkoutTime} />
         </Heading>
         <Actions>
-          <Button type="safe" onClick={() => this.setState({ completed: true })}>Mark me as safe</Button>
+          <Button type="safe" onClick={() => this.markCompleted()}>Mark me as safe</Button>
           <Button onClick={() => this.sendMessageToContacts()} type="message">Send alert message now</Button>
           <a href={`tel:${contactList[0].phone}`}><Button type="callContact">Call my emergency contact</Button></a>
           <a href="tel:000"><Button type="call000">Call 000</Button></a>
